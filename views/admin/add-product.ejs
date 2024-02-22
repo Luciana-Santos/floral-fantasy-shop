@@ -1,0 +1,24 @@
+<%- include('../includes/head', { styles: styles })%>
+  </head>
+
+  <body>
+
+    <%- include('../includes/navigation', { linkPath: path })%>
+
+      <main class="layout main">
+        <h2 class="title">
+          <%= pageTitle %>
+        </h2>
+
+        <form action="/admin/add-product" method="POST" class="main__form">
+          <fieldset>
+            <label for="plantName">Plant name:</label>
+            <input type="text" id="plantName" name="title">
+          </fieldset>
+
+          <button class="btn">Add plant</button>
+        </form>
+
+      </main>
+
+      <%- include('../includes/end') %>

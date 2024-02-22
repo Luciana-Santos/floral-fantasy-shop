@@ -1,0 +1,34 @@
+.shop__list {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.shop__list--item {
+  flex: 1 1 260px;
+  max-width: 300px;
+  display: grid;
+  gap: 18px;
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+}
+
+.item__img {
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.item__info {
+  display: flex;
+  justify-content: space-between;
+  padding-block: 6px;
+  border-top: 2px solid rgb(208, 218, 220);
+  border-bottom: 2px solid rgb(208, 218, 220);
+  text-transform: capitalize;
+}
+
+.item__info h3 {
+  font-weight: 400;
+}

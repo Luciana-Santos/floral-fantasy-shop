@@ -1,0 +1,89 @@
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+}
+
+html {
+  font-size: 100%;
+}
+
+body {
+  min-height: 100vh;
+  line-height: 1.5;
+  font-family: 'Kurale', serif;
+  color: rgb(20, 20, 20);
+}
+
+img {
+  display: block;
+  width: 100%;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.layout {
+  width: min(100% - 30px, 960px);
+  margin-inline: auto;
+}
+
+.main {
+  padding-block: 120px;
+}
+
+.title {
+  text-align: center;
+  text-transform: uppercase;
+  color: #002d33;
+  letter-spacing: 1px;
+  color: rgb(130, 130, 130);
+  margin-bottom: 60px;
+  padding-block: 8px;
+  border-top: 0.0625em solid rgb(208, 218, 220);
+  border-bottom: 0.0625em solid rgb(208, 218, 220);
+}
+
+.btn {
+  all: unset;
+  width: 100%;
+  background-color: rgb(208, 218, 220);
+  color: rgb(0, 45, 51);
+  cursor: pointer;
+  padding-block: 8px;
+  font-size: 1.125rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-family: inherit;
+  border-radius: 4px;
+  transition: all 0.3s;
+  text-align: center;
+}
+
+.btn:hover {
+  background: rgb(0, 45, 51);
+  color: #fff;
+}
+
+.footer {
+  background-color: #002d33;
+  padding-block: 16px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.footer a {
+  color: #fff;
+  padding-block: 6px;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,20 @@
+<header class="header">
+  <nav class="layout nav">
+    <a href="/" class="logo"><img src="/assets/store.svg" alt="Floral Fantasy logo"></a>
+
+    <ul class="header__menu">
+      <li><a href="/" class="<%= linkPath === '/shop' && 'active' %>">Shop</a></li>
+
+      <li><a href="/products" class="<%= linkPath === '/products' && 'active' %>">Products</a></li>
+
+      <li><a href="/cart" class="<%= linkPath === '/cart' && 'active' %>">Cart</a></li>
+
+      <li><a href="/orders" class="<%= linkPath === '/orders' && 'active' %>">Orders</a></li>
+
+      <li><a href="/admin/add-product" class="<%= linkPath === '/admin/add-product' && 'active' %>">Add product</a></li>
+
+      <li><a href="/admin/products" class="<%= linkPath === '/admin/products' && 'active' %>">Admin products</a></li>
+
+    </ul>
+  </nav>
+</header>

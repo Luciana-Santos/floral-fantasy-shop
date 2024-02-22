@@ -1,0 +1,40 @@
+.header {
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  left: 0px;
+  background: #fff;
+  z-index: 10;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 2px;
+}
+
+.nav {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+}
+
+.header__menu {
+  display: flex;
+  gap: 20px;
+}
+
+.header__menu a {
+  text-transform: uppercase;
+  font-family: 'Kurale', serif;
+  color: #002d33;
+  transition: all 0.3s;
+  display: inline-block;
+  padding-block: 20px;
+  color: rgb(130, 130, 130);
+}
+
+.header__menu a:hover {
+  color: rgb(0, 45, 51);
+}

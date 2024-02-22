@@ -1,0 +1,22 @@
+.main__form {
+  max-width: 500px;
+  margin-inline: auto;
+  display: grid;
+  gap: 24px;
+}
+
+.main__form fieldset {
+  border: none;
+}
+
+.main__form label {
+  display: block;
+  font-size: 1.125rem;
+  color: #828282;
+}
+
+.main__form input {
+  width: 100%;
+  padding: 6px;
+  font-size: 1rem;
+}
