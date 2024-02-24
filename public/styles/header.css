@@ -6,6 +6,7 @@
   background: #fff;
   z-index: 10;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 2px;
+  padding-block: 10px;
 }
 
 .nav {
@@ -20,9 +21,57 @@
   height: 40px;
 }
 
+.menu-icon {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.menu-close {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.menu-backdrop {
+  background: rgba(0, 0, 0, 0.6);
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  visibility: hidden;
+  z-index: 1;
+}
+
+.header__menu.active ~ .menu-backdrop {
+  backdrop-filter: blur(2px);
+  visibility: visible;
+}
+
 .header__menu {
   display: flex;
-  gap: 20px;
+  flex-flow: column;
+  position: fixed;
+  top: 0;
+  right: 0;
+  background: #fff;
+  box-shadow: rgba(0, 0, 0, 0.1) -4px 0px 2px;
+  width: 0;
+  height: 100vh;
+  padding-inline: 0px;
+  padding-block: 40px;
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+
+.header__menu.active {
+  width: 60vw;
+  padding-inline: 30px;
 }
 
 .header__menu a {
@@ -31,10 +80,36 @@
   color: #002d33;
   transition: all 0.3s;
   display: inline-block;
-  padding-block: 20px;
+  padding-block: 10px;
   color: rgb(130, 130, 130);
 }
 
 .header__menu a:hover {
   color: rgb(0, 45, 51);
+}
+
+@media (min-width: 720px) {
+  .header__menu {
+    display: flex;
+    gap: 20px;
+    flex-direction: row;
+    height: fit-content;
+    width: fit-content;
+    padding-block: initial;
+    background: none;
+    box-shadow: none;
+    position: static;
+  }
+
+  .menu-icon {
+    display: none;
+  }
+
+  .menu-backdrop {
+    display: none;
+  }
+
+  .menu-close {
+    display: none;
+  }
 }

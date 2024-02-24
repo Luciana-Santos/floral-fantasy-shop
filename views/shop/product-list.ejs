@@ -26,7 +26,12 @@
                   <span>$ <%= product.price %></span>
                 </div>
 
-                <button class="btn">Buy</button>
+                <div class="item__action">
+                  <a href="/products/<%= product.id %>" class="btn">Details</a>
+
+                  <%- include('../includes/add-to-cart', {product: product})%>
+
+                </div>
               </article>
               <% }) %>
           </section>

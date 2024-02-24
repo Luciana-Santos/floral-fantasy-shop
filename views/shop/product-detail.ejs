@@ -1,0 +1,36 @@
+<%- include('../includes/head') %>
+  </head>
+
+  <body>
+
+    <%- include('../includes/navigation', { linkPath: path })%>
+
+      <main class="layout main">
+
+        <section class="product__item">
+          <div class="product__images">
+            <div><img src="<%= product.imageUrl %>" alt="<% product.title %>"></div>
+            <span><img src="<%= product.imageUrl %>" alt="<%= product.title %>"></span>
+            <span><img src="<%= product.imageUrl %>" alt="<%= product.title %>"></span>
+            <span><img src="<%= product.imageUrl %>" alt="<%= product.title %>"></span>
+          </div>
+
+          <div class="product__info">
+            <h3>
+              <%= product.title %>
+            </h3>
+
+            <p>
+              <%= product.description %>
+            </p>
+
+            <h4>
+              $<%= product.price %>
+            </h4>
+
+            <%- include('../includes/add-to-cart')%>
+          </div>
+        </section>
+      </main>
+
+      <%- include('../includes/end')%>

@@ -15,7 +15,8 @@
   color: #828282;
 }
 
-.main__form input {
+.main__form input,
+.main__form textarea {
   width: 100%;
   padding: 6px;
   font-size: 1rem;

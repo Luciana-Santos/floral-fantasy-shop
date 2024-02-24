@@ -2,7 +2,12 @@
   <nav class="layout nav">
     <a href="/" class="logo"><img src="/assets/store.svg" alt="Floral Fantasy logo"></a>
 
-    <ul class="header__menu">
+    <div class="menu-icon" data-menu="open">
+      <img src="/assets/menu.svg" alt="">
+    </div>
+
+    <ul class="header__menu" data-menu="list">
+      <span class="menu-close" data-menu="close"><img src="/assets/close.svg" alt=""></span>
       <li><a href="/" class="<%= linkPath === '/shop' && 'active' %>">Shop</a></li>
 
       <li><a href="/products" class="<%= linkPath === '/products' && 'active' %>">Products</a></li>
@@ -14,7 +19,7 @@
       <li><a href="/admin/add-product" class="<%= linkPath === '/admin/add-product' && 'active' %>">Add product</a></li>
 
       <li><a href="/admin/products" class="<%= linkPath === '/admin/products' && 'active' %>">Admin products</a></li>
-
     </ul>
+    <div class="menu-backdrop" data-menu="backdrop"></div>
   </nav>
 </header>

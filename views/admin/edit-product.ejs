@@ -1,0 +1,43 @@
+<%- include('../includes/head', { styles: styles })%>
+  </head>
+
+  <body>
+
+    <%- include('../includes/navigation', { linkPath: path })%>
+
+      <main class="layout main">
+        <h2 class="title">
+          <%= pageTitle %>
+        </h2>
+
+        <form action="/admin/<% if (editing) { %>edit-product<% } else { %>add-product<% }%>" method="POST" class="main__form">
+          <fieldset>
+            <label for="imageUrl">Plant image:</label>
+            <input type="text" id="imageUrl" name="imageUrl" value="<% if (editing) { %><%= product.imageUrl %><% } %>">
+          </fieldset>
+
+          <fieldset>
+            <label for="title">Plant name:</label>
+            <input type="text" id="title" name="title" value="<% if (editing) { %><%= product.title %><% } %>">
+          </fieldset>
+
+          <fieldset>
+            <label for="price">Plant price:</label>
+            <input type="number" id="price" name="price" step="0.01" value="<% if (editing) { %><%= product.price %><% } %>">
+          </fieldset>
+
+          <fieldset>
+            <label for="description">Plant description:</label>
+            <textarea name="description" id="description" rows="5">
+              <% if (editing) { %><%= product.description%><% } %>
+            </textarea>
+          </fieldset>
+
+          <button class="btn">
+            <% if(editing) { %>Update product <% } else { %>Add product <% } %>
+          </button>
+        </form>
+
+      </main>
+
+      <%- include('../includes/end') %>

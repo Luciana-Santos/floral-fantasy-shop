@@ -51,6 +51,11 @@ a {
   border-bottom: 0.0625em solid rgb(208, 218, 220);
 }
 
+.item__action {
+  display: flex;
+  gap: 10px;
+}
+
 .btn {
   all: unset;
   width: 100%;
@@ -65,11 +70,17 @@ a {
   border-radius: 4px;
   transition: all 0.3s;
   text-align: center;
+  display: inline-block;
 }
 
 .btn:hover {
   background: rgb(0, 45, 51);
   color: #fff;
+}
+
+a.btn {
+  background: transparent;
+  border: 1px solid rgb(0, 45, 51);
 }
 
 .footer {
