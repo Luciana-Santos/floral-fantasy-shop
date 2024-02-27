@@ -1,5 +1,6 @@
 const fs = require('fs')
 const path = require('../utils/path')
+const crypto = require('crypto')
 
 const Cart = require('./cart')
 
@@ -36,7 +37,7 @@ module.exports = class Product {
           console.log(`error: ${err}`)
         })
       } else {
-        this.id = String(Math.random() * 1000)
+        this.id = crypto.randomBytes(4).toString('hex')
         products.push(this)
         fs.writeFile(storage, JSON.stringify(products), (err) => {
           console.log(`error: ${err}`)

@@ -37,7 +37,7 @@ module.exports = {
     Cart.getCart((cart) => {
       Product.fetchAll((products) => {
         const cartProducts = []
-        for (product of products) {
+        for (let product of products) {
           const carProductData = cart.products.find(
             (prod) => prod.id === product.id,
           )

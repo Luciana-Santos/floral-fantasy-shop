@@ -24,7 +24,7 @@
                   <p>Quantity: <span>
                       <%= prod.qty %>
                     </span></p>
-                  <p>Subtotal: <span>$ -</span></p>
+                  <p>Subtotal: <span>$ <%= prod.totalPrice %></span></p>
 
                   <form action="/cart-delete-item" method="POST">
                     <input type="hidden" name="productId" value="<%= prod.productData.id %>">
