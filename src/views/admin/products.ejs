@@ -1,0 +1,48 @@
+<%- include('../includes/head', { styles: styles })%>
+  </head>
+
+  <body>
+
+    <%- include('../includes/navigation', { linkPath: path })%>
+
+      <main class="layout main">
+        <% if (prods.length> 0) { %>
+
+          <h2 class="title">
+            <%= pageTitle %>
+          </h2>
+
+          <section class="shop__list">
+            <% prods.forEach((product)=> { %>
+              <article class="shop__list--item">
+                <div class="item__img">
+                  <img src="<%= product.imageUrl %>" alt="<%= product.title %>">
+                </div>
+
+                <div class="item__info">
+                  <h3>
+                    <%= product.title %>
+                  </h3>
+                  <span>$ <%= product.price %></span>
+                </div>
+
+                <div class="item__action">
+                  <a href="/admin/edit-product/<%= product._id %>?edit=true" class="btn">Edit</a>
+
+                  <form action="/admin/delete-product" method="POST">
+                    <input type="hidden" value="<%= product._id %>" name="productId">
+                    <button class="btn" type="submit">Delete</button>
+                  </form>
+
+                </div>
+              </article>
+              <% }) %>
+          </section>
+          <% } else { %>
+            <h2 class="title">
+              No plants grown yet
+            </h2>
+            <% } %>
+      </main>
+
+      <%- include('../includes/end')%>

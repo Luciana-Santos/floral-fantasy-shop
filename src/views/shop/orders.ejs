@@ -1,0 +1,31 @@
+<%- include('../includes/head') %>
+  </head>
+
+  <body>
+
+    <%- include('../includes/navigation', { linkPath: path })%>
+
+      <main class="layout main">
+        <% if (orders.length <=0) { %>
+          <h2 class="title">
+            Nothing there!
+          </h2>
+          <% } else { %>
+            <ul>
+              <% orders.forEach(order=> { %>
+                <li>
+                  <h3>
+                    # <%= order.id %>
+                  </h3>
+                  <ul>
+                    <% order.products.forEach(product=> { %>
+                      <li>
+                        <%= product.title %> (<%= product.orderItem.quantity %>)
+                      </li>
+                      <% }) %>
+                  </ul>
+                </li>
+                <% }) %>
+            </ul>
+            <% } %>
+      </main>

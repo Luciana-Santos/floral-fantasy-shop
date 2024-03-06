@@ -1,0 +1,47 @@
+<%- include('../includes/head', { styles: styles })%>
+  </head>
+
+  <body>
+
+    <%- include('../includes/navigation', { linkPath: '' })%>
+
+      <main class="layout main">
+        <% if (products.length> 0) { %>
+          <h2 class="title">
+            <%= pageTitle %>
+          </h2>
+
+          <ul class="cart__list">
+            <% products.forEach(prod=> { %>
+              <li class="cart__item">
+                <div class="cart__item--image">
+                  <img src="<%= prod.imageUrl %>" alt="<%= prod.title %>">
+                </div>
+                <div class="cart__item--details">
+                  <h4>
+                    <%= prod.title %>
+                  </h4>
+                  <p>Quantity: <span>
+                      <%= prod.cartItem.quantity %>
+                    </span></p>
+                  <p>Subtotal: <span>$ <%= prod.totalPrice %></span></p>
+
+                  <form action="/cart-delete-item" method="POST">
+                    <input type="hidden" name="productId" value="<%= prod.id %>">
+                    <button type="submit" class="cart__item--action">Delete</button>
+                  </form>
+                </div>
+              </li>
+              <% }) %>
+          </ul>
+          <form action="/create-order" method="POST" ">
+            <button type=" submit" class="cart__checkout btn">Checkout</button>
+          </form>
+          <% } else { %>
+            <h2 class=" title">
+              No products in cart!
+            </h2>
+            <% } %>
+      </main>
+
+      <%- include('../includes/end') %>

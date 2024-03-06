@@ -1,14 +1,14 @@
+version: '3.1'
 services:
-  mysql:
-    container_name: mysql
-    image: mysql
+  mongo:
+    image: mongo
     restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: ch3$9krbvd53R4
     ports:
-      - 3306:3306
-    volumes:
-      - mysql_data:/var/lib/mysql
-
-volumes:
-  mysql_data:
+      - 27017:27017
+    container_name: mongo-container
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    container_name: mongo-express-container

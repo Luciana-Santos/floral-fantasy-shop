@@ -2,20 +2,27 @@
   "name": "floral-fantasy-shop",
   "version": "1.0.0",
   "description": "Projeto final do curso de NodeJS - The Complete guide",
-  "main": "app.js",
+  "main": "src/app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "dotenv -c development -- nodemon src/app.js | pino-pretty"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "nodemon": "^3.0.3"
+    "envalid": "^8.0.0",
+    "nodemon": "^3.0.3",
+    "pino-pretty": "^10.3.1"
   },
   "dependencies": {
     "body-parser": "^1.20.2",
+    "dotenv-cli": "^7.3.0",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
-    "mysql2": "^3.9.2"
+    "mongodb": "^6.4.0",
+    "mysql2": "^3.9.2",
+    "pino": "^8.19.0",
+    "sequelize": "^6.37.1"
   }
 }
