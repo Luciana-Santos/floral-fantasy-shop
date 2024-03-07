@@ -1,6 +1,6 @@
 .grid {
   display: grid;
-  grid-template-columns: minmax(112px, 3fr) repeat(3, minmax(max-content, 1fr));
+  grid-template-columns: minmax(105px, 3fr) repeat(3, minmax(max-content, 1fr));
   gap: 10px;
 }
 
@@ -32,6 +32,7 @@
 }
 
 .cart__header {
+  grid-row: 1;
   color: rgb(130, 130, 130);
   border-bottom: 1px solid;
   border-color: inherit;
@@ -65,8 +66,7 @@
 }
 
 .cart__info--image {
-  min-width: 50px;
-  margin-inline: auto;
+  max-width: 112px;
 }
 
 .cart__total-price {
