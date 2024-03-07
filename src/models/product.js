@@ -3,12 +3,13 @@ const logger = require('../utils/logger')
 const { getDb, parseIdFromHexString } = require('../config/database')
 
 class Product {
-  constructor(imageUrl, title, price, description, id) {
+  constructor(imageUrl, title, price, description, id, userId) {
     this.imageUrl = imageUrl
     this.title = title
     this.price = price
     this.description = description
     this._id = id
+    this.userId = userId
   }
 
   async save() {

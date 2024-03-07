@@ -8,17 +8,17 @@
 
     <ul class="header__menu" data-menu="list">
       <span class="menu-close" data-menu="close"><img src="/assets/close.svg" alt=""></span>
-      <li><a href="/" class="<%= linkPath === '/shop' && 'active-link' %>">Shop</a></li>
+      <li><a href="/" class="<%= path === '/shop' && 'active-link' %>">Shop</a></li>
 
-      <li><a href="/products" class="<%= linkPath === '/products' && 'active-link' %>">Products</a></li>
+      <li><a href="/products" class="<%= path === '/products' && 'active-link' %>">Products</a></li>
 
-      <li><a href="/cart" class="<%= linkPath === '/cart' && 'active-link' %>">Cart</a></li>
+      <li><a href="/cart" class="<%= path === '/cart' && 'active-link' %>">Cart</a></li>
 
-      <li><a href="/orders" class="<%= linkPath === '/orders' && 'active-link' %>">Orders</a></li>
+      <li><a href="/orders" class="<%= path === '/orders' && 'active-link' %>">Orders</a></li>
 
-      <li><a href="/admin/add-product" class="<%= linkPath === '/admin/add-product' && 'active-link' %>">Add product</a></li>
+      <li><a href="/admin/add-product" class="<%= path === '/admin/add-product' && 'active-link' %>">Add product</a></li>
 
-      <li><a href="/admin/products" class="<%= linkPath === '/admin/products' && 'active-link' %>">Admin products</a></li>
+      <li><a href="/admin/products" class="<%= path === '/admin/products' && 'active-link' %>">Admin products</a></li>
     </ul>
     <div class="menu-backdrop" data-menu="backdrop"></div>
   </nav>

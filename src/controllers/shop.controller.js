@@ -9,7 +9,7 @@ module.exports = {
         prods: products,
         pageTitle: 'All products',
         path: '/products',
-        styles: ['shop', 'products'],
+        styles: ['products'],
       })
     } catch (err) {
       logger.error(err)
@@ -35,62 +35,65 @@ module.exports = {
       res.render('shop/index', {
         prods: products,
         pageTitle: 'Shop',
-        path: '/',
-        styles: ['shop', 'products'],
+        path: '/shop',
+        styles: ['products'],
       })
     } catch (err) {
       logger.error(err)
     }
   },
-  getCart: (req, res, next) => {
-    req.user
-      .getCart()
-      .then((cart) => {
-        return cart
-          .getProducts()
-          .then((products) => {
-            res.render('shop/cart', {
-              path: '/cart',
-              pageTitle: 'Your cart',
-              styles: ['cart'],
-              products: products,
-            })
-          })
-          .catch(console.log)
+  getCart: async (req, res, next) => {
+    try {
+      const products = await req.user.getCart()
+      res.render('shop/cart', {
+        path: '/cart',
+        pageTitle: 'Your cart',
+        styles: ['cart'],
+        products: products,
       })
-      .catch(console.log)
+    } catch (err) {
+      logger.error(err, 'erro no get do cart')
+    }
   },
-  postCart: (req, res, next) => {
-    const prodId = req.body.productId
-    let fetchedCart
-    let newQuantity = 1
-    req.user
-      .getCart()
-      .then((cart) => {
-        fetchedCart = cart
-        return cart.getProducts({ where: { id: prodId } })
-      })
-      .then((products) => {
-        let product
-        if (products.length > 0) {
-          product = products[0]
-        }
-        if (product) {
-          const oldQuantity = product.cartItem.quantity
-          newQuantity += oldQuantity
-          return product
-        }
-        return Product.findByPk(prodId)
-      })
-      .then((product) => {
-        return fetchedCart.addProduct(product, {
-          through: { quantity: newQuantity },
-        })
-      })
-      .then((cart) => {
-        res.redirect('/cart')
-      })
-      .catch(console.log)
+  postCart: async (req, res, next) => {
+    try {
+      const { productId } = req.body
+      const product = await Product.findById(productId)
+      const cartItem = await req.user.addToCart(product)
+      res.redirect('/cart')
+      return cartItem
+    } catch (err) {
+      logger.error(err)
+    }
+    // let fetchedCart
+    // let newQuantity = 1
+    // req.user
+    //   .getCart()
+    //   .then((cart) => {
+    //     fetchedCart = cart
+    //     return cart.getProducts({ where: { id: prodId } })
+    //   })
+    //   .then((products) => {
+    //     let product
+    //     if (products.length > 0) {
+    //       product = products[0]
+    //     }
+    //     if (product) {
+    //       const oldQuantity = product.cartItem.quantity
+    //       newQuantity += oldQuantity
+    //       return product
+    //     }
+    //     return Product.findByPk(prodId)
+    //   })
+    //   .then((product) => {
+    //     return fetchedCart.addProduct(product, {
+    //       through: { quantity: newQuantity },
+    //     })
+    //   })
+    //   .then((cart) => {
+    //     res.redirect('/cart')
+    //   })
+    //   .catch(console.log)
   },
   postCartDeleteProduct: (req, res, next) => {
     const prodId = req.body.productId

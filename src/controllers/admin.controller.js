@@ -10,10 +10,18 @@ module.exports = {
       editing: false,
     })
   },
-  postAddProduct: async (req, res) => {
+  postAddProduct: async (req, res, next) => {
     try {
+      const userId = await req.user._id
       const { imageUrl, title, price, description } = req.body
-      const product = new Product(imageUrl, title, price, description)
+      const product = new Product(
+        imageUrl,
+        title,
+        price,
+        description,
+        null,
+        userId,
+      )
       await product.save()
       res.redirect('/admin/products')
     } catch (err) {
@@ -58,8 +66,8 @@ module.exports = {
       res.render('admin/products', {
         prods: products,
         pageTitle: 'Shop',
-        styles: ['shop', 'products'],
-        path: '/shop',
+        styles: ['products'],
+        path: '/admin/products',
       })
     } catch (err) {
       logger.error(err)

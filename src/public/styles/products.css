@@ -19,11 +19,6 @@
   position: relative;
 }
 
-.item__img {
-  border-radius: 6px;
-  overflow: hidden;
-}
-
 .item__info {
   display: flex;
   justify-content: space-between;

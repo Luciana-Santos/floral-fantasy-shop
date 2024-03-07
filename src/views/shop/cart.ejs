@@ -3,40 +3,66 @@
 
   <body>
 
-    <%- include('../includes/navigation', { linkPath: '' })%>
+    <%- include('../includes/navigation', { linkPath: path })%>
 
       <main class="layout main">
-        <% if (products.length> 0) { %>
+        <% if (products.newProducts.length> 0) { %>
           <h2 class="title">
             <%= pageTitle %>
           </h2>
 
-          <ul class="cart__list">
-            <% products.forEach(prod=> { %>
-              <li class="cart__item">
-                <div class="cart__item--image">
-                  <img src="<%= prod.imageUrl %>" alt="<%= prod.title %>">
-                </div>
-                <div class="cart__item--details">
-                  <h4>
-                    <%= prod.title %>
-                  </h4>
-                  <p>Quantity: <span>
-                      <%= prod.cartItem.quantity %>
-                    </span></p>
-                  <p>Subtotal: <span>$ <%= prod.totalPrice %></span></p>
+          <div class="cart">
+            <div class="cart__header grid">
+              <div class="item pb">Item</div>
+              <div class="price pb">Price</div>
+              <div class="quantity pb">Quantity</div>
+              <div class="subtotal pb">Subtotal</div>
+            </div>
 
-                  <form action="/cart-delete-item" method="POST">
-                    <input type="hidden" name="productId" value="<%= prod.id %>">
-                    <button type="submit" class="cart__item--action">Delete</button>
-                  </form>
+            <div>
+              <% products.newProducts.forEach(prod=> { %>
+                <div class="cart__item grid">
+                  <div class="cart__info">
+                    <div class="cart__info--image"><img src="<%= prod.imageUrl %>" alt="<%= prod.title %>"></div>
+                    <div class="cart__info--title">
+                      <h4>
+                        <%= prod.title %>
+                      </h4>
+                      <p>
+                        <%= prod.description %>
+                      </p>
+
+                      <form action="/cart-delete-item" method="POST">
+                        <input type="hidden" name="productId" value="<%= prod.id %>">
+                        <button type="submit" class="cart__item--action">Delete</button>
+                      </form>
+                    </div>
+                  </div>
+                  <div class="cart__info--price">$<%= prod.price %>
+                  </div>
+                  <div class="cart__info--quantity">
+                    <%= prod.quantity %>
+                  </div>
+                  <div class="cart__info--substotal">$<%= prod.subtotal %>
+                  </div>
                 </div>
-              </li>
-              <% }) %>
-          </ul>
-          <form action="/create-order" method="POST" ">
-            <button type=" submit" class="cart__checkout btn">Checkout</button>
-          </form>
+
+                <% }) %>
+            </div>
+
+            <div class="cart__total-price">
+              <span>Total:</span>
+              <h3>
+                $<%= products.totalPrice %>
+              </h3>
+            </div>
+
+            <form action="/create-order" method="POST" ">
+              <button type=" submit" class="cart__checkout btn">Checkout</button>
+            </form>
+          </div>
+
+
           <% } else { %>
             <h2 class=" title">
               No products in cart!
