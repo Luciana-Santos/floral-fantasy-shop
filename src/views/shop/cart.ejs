@@ -6,7 +6,7 @@
     <%- include('../includes/navigation', { linkPath: path })%>
 
       <main class="layout main">
-        <% if (products.newProducts.length> 0) { %>
+        <% if (products && products.newProducts && products.newProducts.length> 0) { %>
           <h2 class="title">
             <%= pageTitle %>
           </h2>
@@ -33,7 +33,7 @@
                       </p>
 
                       <form action="/cart-delete-item" method="POST">
-                        <input type="hidden" name="productId" value="<%= prod.id %>">
+                        <input type="hidden" name="productId" value="<%= prod._id %>">
                         <button type="submit" class="cart__item--action">Delete</button>
                       </form>
                     </div>
@@ -57,7 +57,7 @@
               </h3>
             </div>
 
-            <form action="/create-order" method="POST" ">
+            <form action="/create-order" method="POST">
               <button type=" submit" class="cart__checkout btn">Checkout</button>
             </form>
           </div>

@@ -60,6 +60,12 @@ class Product {
       await db
         .collection('products')
         .deleteOne({ _id: parseIdFromHexString(prodId) })
+      db.collection('users').updateMany(
+        {},
+        {
+          $pull: { 'cart.items': { _id: parseIdFromHexString(prodId) } },
+        },
+      )
       logger.info('product deleted')
     } catch (err) {
       logger.error(err)

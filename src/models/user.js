@@ -5,7 +5,7 @@ class User {
   constructor(username, email, cart, id) {
     this.name = username
     this.email = email
-    this.cart = cart
+    this.cart = cart || { items: [], total: 0 }
     this._id = id
   }
 
@@ -24,7 +24,6 @@ class User {
       const db = getDb()
       let newQuantity = 1
       let newSubtotal = 0
-      let totalPrice
       const updatedCartItems = [...this.cart.items]
 
       const cartProductIndex = this.cart.items.findIndex(
@@ -34,18 +33,21 @@ class User {
       if (cartProductIndex >= 0) {
         newQuantity = this.cart.items[cartProductIndex].quantity + 1
         updatedCartItems[cartProductIndex].quantity = newQuantity
-        newSubtotal = product.price * newQuantity
+        newSubtotal = +product.price * newQuantity
         updatedCartItems[cartProductIndex].subtotal = newSubtotal
       } else {
         updatedCartItems.push({
           productId: product._id,
           quantity: newQuantity,
-          subtotal: product.price,
+          subtotal: +product.price,
         })
       }
-
+      const getCartTotalPrice = updatedCartItems
+        .map((product) => product.subtotal)
+        .reduce((prevSubtotal, currSubtotal) => prevSubtotal + currSubtotal)
       const updatedCart = {
         items: updatedCartItems,
+        total: getCartTotalPrice,
       }
 
       return await db
@@ -68,18 +70,75 @@ class User {
         const prodItem = this.cart.items.find((item) => {
           return item.productId.toString() === prod._id.toString()
         })
+
         return {
           ...prod,
           quantity: prodItem.quantity,
-          subtotal: prodItem.subtotal,
+          subtotal: parseFloat(prodItem.subtotal),
         }
       })
       const totalPrice = newProducts
         .map((prodPrice) => prodPrice.subtotal)
-        .reduce((acc, curr) => acc + curr)
+        .reduce((acc, curr) => acc + curr, 0)
       return { newProducts, totalPrice }
     } catch (err) {
       logger.error(err, 'erro ao mapear o cart')
+    }
+  }
+
+  async deleteItemFromCart(productId) {
+    try {
+      const db = getDb()
+      const updatedCartItems = this.cart.items.filter(
+        (item) => item.productId.toString() !== productId.toString(),
+      )
+      logger.info(updatedCartItems, 'deleteItemFromCart: updatedCartItems')
+      return await db
+        .collection('users')
+        .updateOne(
+          { _id: this._id },
+          { $set: { cart: { items: updatedCartItems } } },
+        )
+    } catch (err) {
+      logger.error(err)
+    }
+  }
+
+  async addOrder() {
+    try {
+      const db = getDb()
+      const cart = await this.getCart()
+      const order = {
+        items: cart.newProducts,
+        total: cart.totalPrice,
+        user: {
+          _id: this._id,
+          name: this.name,
+        },
+      }
+      await db.collection('orders').insertOne(order)
+      this.cart = { items: [], totalPrice: 0 }
+      await db
+        .collection('users')
+        .updateOne(
+          { _id: this._id },
+          { $set: { cart: { items: [], totalPrice: 0 } } },
+        )
+    } catch (err) {
+      logger.error(err)
+    }
+  }
+
+  async getOrders() {
+    try {
+      const db = getDb()
+      const orders = await db
+        .collection('orders')
+        .find({ 'user._id': this._id })
+        .toArray()
+      return orders
+    } catch (err) {
+      logger.error(err)
     }
   }
 

@@ -6,26 +6,43 @@
     <%- include('../includes/navigation', { linkPath: path })%>
 
       <main class="layout main">
-        <% if (orders.length <=0) { %>
-          <h2 class="title">
-            Nothing there!
-          </h2>
-          <% } else { %>
-            <ul>
-              <% orders.forEach(order=> { %>
-                <li>
-                  <h3>
-                    # <%= order.id %>
-                  </h3>
-                  <ul>
-                    <% order.products.forEach(product=> { %>
-                      <li>
-                        <%= product.title %> (<%= product.orderItem.quantity %>)
-                      </li>
-                      <% }) %>
-                  </ul>
-                </li>
-                <% }) %>
-            </ul>
-            <% } %>
+        <div class="orders">
+          <% if (orders.length> 0) { %>
+            <% orders.forEach(order=> { %>
+              <details>
+                <summary>
+                  # <%= order._id %>
+                </summary>
+
+                <div class="order__container">
+                  <% order.items.forEach(item=> { %>
+                    <div class="order__item">
+                      <img src="<%= item.imageUrl %>" alt="<%= item.title %>" class="order__item--image">
+                      <div class="order__item--info">
+                        <h4 class="order__item--title">
+                          <%= item.title %>
+                        </h4>
+                        <p class="order__item--quantity">Quantity: <span>
+                            <%= item.quantity %>
+                          </span></p>
+                        <p class="order__item--quantity">Price: <span>
+                            $<%= item.price %>
+                          </span></p>
+                      </div>
+                    </div>
+                    <% }) %>
+                </div>
+                <h5 class="order__total">
+                  Order total: $<%= order.total %>
+                </h5>
+              </details>
+
+              <% }) %>
+                <% } else { %>
+                  <h2 class="title">
+                    Nothing there!
+                  </h2>
+
+                  <% } %>
+        </div>
       </main>
