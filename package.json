@@ -5,15 +5,29 @@
   "main": "src/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "dotenv -c development -- nodemon src/app.js | pino-pretty"
+    "start": "dotenv -c development -- nodemon src/app.js | pino-pretty",
+    "prettier:format": "prettier --write src/** --ignore-unknown",
+    "husky:prepare": "husky"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint src/** --fix",
+      "prettier --check src/** --ignore-unknown"
+    ]
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "envalid": "^8.0.0",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "git-commit-msg-linter": "^5.0.7",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2",
     "nodemon": "^3.0.3",
-    "pino-pretty": "^10.3.1"
+    "pino-pretty": "^10.3.1",
+    "prettier": "^3.2.5"
   },
   "dependencies": {
     "body-parser": "^1.20.2",
@@ -21,6 +35,7 @@
     "ejs": "^3.1.9",
     "express": "^4.18.2",
     "mongodb": "^6.4.0",
+    "mongoose": "^8.2.1",
     "mysql2": "^3.9.2",
     "pino": "^8.19.0",
     "sequelize": "^6.37.1"

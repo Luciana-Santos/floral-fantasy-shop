@@ -6,7 +6,7 @@
     <%- include('../includes/navigation', { linkPath: path })%>
 
       <main class="layout main">
-        <% if (products && products.newProducts && products.newProducts.length> 0) { %>
+        <% if (cart && cart.items && cart.items.length> 0) { %>
           <h2 class="title">
             <%= pageTitle %>
           </h2>
@@ -20,25 +20,25 @@
             </div>
 
             <div>
-              <% products.newProducts.forEach(prod=> { %>
+              <% cart.items.forEach(prod=> { %>
                 <div class="cart__item grid">
                   <div class="cart__info">
-                    <div class="cart__info--image"><img src="<%= prod.imageUrl %>" alt="<%= prod.title %>"></div>
+                    <div class="cart__info--image"><img src="<%= prod.productId.imageUrl %>" alt="<%= prod.productId.title %>"></div>
                     <div class="cart__info--title">
                       <h4>
-                        <%= prod.title %>
+                        <%= prod.productId.title %>
                       </h4>
                       <p>
-                        <%= prod.description %>
+                        <%= prod.productId.description %>
                       </p>
 
                       <form action="/cart-delete-item" method="POST">
-                        <input type="hidden" name="productId" value="<%= prod._id %>">
+                        <input type="hidden" name="productId" value="<%= prod.productId._id %>">
                         <button type="submit" class="cart__item--action">Delete</button>
                       </form>
                     </div>
                   </div>
-                  <div class="cart__info--price">$<%= prod.price %>
+                  <div class="cart__info--price">$<%= prod.productId.price %>
                   </div>
                   <div class="cart__info--quantity">
                     <%= prod.quantity %>
@@ -53,7 +53,7 @@
             <div class="cart__total-price">
               <span>Total:</span>
               <h3>
-                $<%= products.totalPrice %>
+                $<%= cart.total %>
               </h3>
             </div>
 

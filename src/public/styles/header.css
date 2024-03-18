@@ -76,7 +76,7 @@
 
 .header__menu a {
   text-transform: uppercase;
-  font-family: 'Kurale', serif;
+  font-family: "Kurale", serif;
   color: #002d33;
   transition: all 0.3s;
   display: inline-block;

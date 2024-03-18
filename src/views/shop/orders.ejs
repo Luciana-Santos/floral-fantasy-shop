@@ -7,15 +7,15 @@
 
       <main class="layout main">
         <div class="orders">
-          <% if (orders.length> 0) { %>
-            <% orders.forEach(order=> { %>
+          <% if (orders.products.length> 0) { %>
+            <% orders.products.forEach(order=> { %>
               <details>
                 <summary>
                   # <%= order._id %>
                 </summary>
 
                 <div class="order__container">
-                  <% order.items.forEach(item=> { %>
+                  <% order.product.forEach(item=> { %>
                     <div class="order__item">
                       <img src="<%= item.imageUrl %>" alt="<%= item.title %>" class="order__item--image">
                       <div class="order__item--info">
